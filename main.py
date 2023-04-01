@@ -10,12 +10,14 @@ from numpy import linspace
 a = 0.4
 b = 0.9
 nodes = 10
+tableFinDif = []
 x_stars =[0.42, 0.87, 0.67]
 x_values = linspace(a, b, num=nodes)
 header = ["n", "Aerror", "Rerror", "Terror"]
+createFinDifTable(x_values, tableFinDif)
+h = x_values[1] - x_values[0]
+#print(tableFinDif)
 
-foo_list = []
-
-createFinDifTable(x_values, foo_list)
-
-print(foo_list)
+for x_star in x_stars:
+    t = (x_star - x_values[0]) / h
+    print(t)
