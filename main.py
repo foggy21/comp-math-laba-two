@@ -1,4 +1,5 @@
 from finite_differences import createFinDifTable
+from formulas import firstNewton, secondGauss, firstGauss, secondGauss
 from numpy import linspace
 
 # function x^2 + ln(x);
@@ -10,14 +11,14 @@ from numpy import linspace
 a = 0.4
 b = 0.9
 nodes = 10
-tableFinDif = []
+
 x_stars =[0.42, 0.87, 0.67]
 x_values = linspace(a, b, num=nodes)
 header = ["n", "Aerror", "Rerror", "Terror"]
-createFinDifTable(x_values, tableFinDif)
+tableFinDif = createFinDifTable(x_values)
 h = x_values[1] - x_values[0]
-#print(tableFinDif)
+print(tableFinDif)
 
 for x_star in x_stars:
     t = (x_star - x_values[0]) / h
-    print(t)
+    #print(t)

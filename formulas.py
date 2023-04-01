@@ -3,7 +3,7 @@ from math import factorial
 def firstNewton(nodes, finDifTable, t):
     result = 0
     for i in range(len(nodes)):
-        result += (finDifTable[i]/factorial(i+1)) * firstNewtonMultipy(i, t)
+        result += (finDifTable[i][i/2]/factorial(i+1)) * firstNewtonMultipy(i, t)
     return result
 
 def firstNewtonMultipy(i, t):
@@ -15,7 +15,7 @@ def firstNewtonMultipy(i, t):
 def secondNewton(nodes, finDifTable, t):
     result = 0
     for i in range(len(nodes)):
-        result = finDifTable[i] * secondNewtonMultipy(i, t)
+        result = finDifTable[i][-i/2] * secondNewtonMultipy(i, t)
     return result
 
 def secondNewtonMultipy(i, t):
@@ -27,7 +27,7 @@ def secondNewtonMultipy(i, t):
 def firstGauss(nodes, finDifTable, t):
     result = 0
     for i in range(len(nodes)):
-        result += (finDifTable[i] * (1/factorial(i+1))) * firstGaussMultipy(i, t)
+        result += (finDifTable[i][i/2] * (1/factorial(i+1))) * firstGaussMultipy(i, t)
     return result
 
 def firstGaussMultipy(i, t):
@@ -42,7 +42,7 @@ def firstGaussMultipy(i, t):
 def secondGauss(nodes, finDifTable, t):
     result = 0
     for i in range(len(nodes)):
-        result += (finDifTable[i] * (1/factorial(i+1))) * secondGaussMultiply(i, t)
+        result += (finDifTable[i][-i/2] * (1/factorial(i+1))) * secondGaussMultiply(i, t)
     return result
 
 def secondGaussMultiply(i, t):

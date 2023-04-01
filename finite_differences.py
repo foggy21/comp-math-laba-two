@@ -1,12 +1,11 @@
 from function import func
 
-def createFinDifTable(x_values, table = []):
-    if (len(x_values) == 2):
-        fin_dif = func(x_values[1]) - func(x_values[0])
-        table.append(fin_dif)
-        return fin_dif
-    if (len(x_values) > 2):
-        fin_dif = createFinDifTable(x_values[1:len(x_values)-1], table) - createFinDifTable(x_values[0:len(x_values)-2], table)
-        table.append(fin_dif)
-        return fin_dif
-
+def createFinDifTable(x):
+    n = len(x)
+    table = [[0 for i in range(n)] for j in range(n)]
+    for i in range(n):
+        table[i][0] = func(x[i])
+    for j in range(1, n):
+        for i in range(n-j):
+            table[i][j] = (table[i+1][j-1] - table[i][j-1]) / (x[i+j] - x[i])
+    return table
