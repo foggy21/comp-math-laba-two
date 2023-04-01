@@ -5,7 +5,7 @@ from scipy.misc import derivative
 def firstNewton(nodes, finDifTable, t):
     result = 0
     for i in range(nodes):
-        result += (finDifTable[i][int(i/2)]/factorial(i+1)) * firstNewtonMultipy(i, t)
+        result += (finDifTable[0][i]/factorial(i+1)) * firstNewtonMultipy(i, t)
     return result
 
 def firstNewtonMultipy(i, t):
@@ -17,7 +17,7 @@ def firstNewtonMultipy(i, t):
 def secondNewton(nodes, finDifTable, t):
     result = 0
     for i in range(nodes):
-        result = finDifTable[i][int(-i/2)] * secondNewtonMultipy(i, t)
+        result = finDifTable[nodes-i-1][i] * secondNewtonMultipy(i, t)
     return result
 
 def secondNewtonMultipy(i, t):
@@ -28,8 +28,8 @@ def secondNewtonMultipy(i, t):
 
 def firstGauss(nodes, finDifTable, t):
     result = 0
-    for i in range(nodes):
-        result += (finDifTable[i][int(i/2)] * (1/factorial(i+1))) * firstGaussMultipy(i, t)
+    for i in range(nodes//2+1):
+        result += (finDifTable[(nodes-1)//2-i+1][2*i-1] * (1/factorial(i+1))) * firstGaussMultipy(i, t)
     return result
 
 def firstGaussMultipy(i, t):
@@ -43,8 +43,8 @@ def firstGaussMultipy(i, t):
 
 def secondGauss(nodes, finDifTable, t):
     result = 0
-    for i in range(nodes):
-        result += (finDifTable[i][int(-i/2)] * (1/factorial(i+1))) * secondGaussMultiply(i, t)
+    for i in range(nodes//2+1):
+        result += (finDifTable[(nodes-1)//2-i+1][2*i-2] * (1/factorial(i+1))) * secondGaussMultiply(i, t)
     return result
 
 def secondGaussMultiply(i, t):
