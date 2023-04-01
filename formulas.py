@@ -1,9 +1,11 @@
 from math import factorial
+from function import der_func
+from scipy.misc import derivative
 
 def firstNewton(nodes, finDifTable, t):
     result = 0
-    for i in range(len(nodes)):
-        result += (finDifTable[i][i/2]/factorial(i+1)) * firstNewtonMultipy(i, t)
+    for i in range(nodes):
+        result += (finDifTable[i][int(i/2)]/factorial(i+1)) * firstNewtonMultipy(i, t)
     return result
 
 def firstNewtonMultipy(i, t):
@@ -14,8 +16,8 @@ def firstNewtonMultipy(i, t):
 
 def secondNewton(nodes, finDifTable, t):
     result = 0
-    for i in range(len(nodes)):
-        result = finDifTable[i][-i/2] * secondNewtonMultipy(i, t)
+    for i in range(nodes):
+        result = finDifTable[i][int(-i/2)] * secondNewtonMultipy(i, t)
     return result
 
 def secondNewtonMultipy(i, t):
@@ -26,8 +28,8 @@ def secondNewtonMultipy(i, t):
 
 def firstGauss(nodes, finDifTable, t):
     result = 0
-    for i in range(len(nodes)):
-        result += (finDifTable[i][i/2] * (1/factorial(i+1))) * firstGaussMultipy(i, t)
+    for i in range(nodes):
+        result += (finDifTable[i][int(i/2)] * (1/factorial(i+1))) * firstGaussMultipy(i, t)
     return result
 
 def firstGaussMultipy(i, t):
@@ -41,8 +43,8 @@ def firstGaussMultipy(i, t):
 
 def secondGauss(nodes, finDifTable, t):
     result = 0
-    for i in range(len(nodes)):
-        result += (finDifTable[i][-i/2] * (1/factorial(i+1))) * secondGaussMultiply(i, t)
+    for i in range(nodes):
+        result += (finDifTable[i][int(-i/2)] * (1/factorial(i+1))) * secondGaussMultiply(i, t)
     return result
 
 def secondGaussMultiply(i, t):
@@ -52,4 +54,11 @@ def secondGaussMultiply(i, t):
             result *= (t + (j+1)/2)
         else:
             result *= (t - (j+1)/2)
+    return result
+
+def rnx(nodes, x_values, x_star):
+    result = derivative(der_func, x_values[0], n=nodes, order=nodes+1)
+    result /= factorial(nodes+1)
+    for x in x_values:
+        result *= (x_star - x)
     return result
