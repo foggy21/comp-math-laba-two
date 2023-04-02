@@ -19,17 +19,25 @@ header = ["n", "Aerror", "Rerror", "Terror"]
 tableFinDif = createFinDifTable(x_values)
 h = x_values[1] - x_values[0]
 rnx_members = []
+rnxes = []
 #print(tableFinDif)
 
-for x_star in x_stars:
-    rnx_members.append(rnx(nodes, x_values, x_star))
-
-print(min(rnx_members))
-print(max(rnx_members))
+print(len(tableFinDif))
+x0 = 0
 
 for x_star in x_stars:
+    x_old = x_values[0]
+    for x in x_values[1:]:
+        if (x_old <= x_star and x_star <= x):
+            if ((x_star - x_old) < (x - x_star)):
+                x0 = x_old
+            else:
+                x0 = x
+            break
+        x_old = x
     cur_rnx = 0
-    t = (x_star - x_values[0]) / h
+    rnx_members.append(rnx(nodes, x0, x_values, x_star))
+    t = (abs(x_star - x0)) / h
     if (x_star <= x_values[1]):
         cur_rnx = firstNewton(nodes, tableFinDif, t)
     if (x_star >= x_values[len(x_values)-2]):
@@ -40,6 +48,12 @@ for x_star in x_stars:
         cur_rnx = secondGauss(nodes, tableFinDif, t)
     
     cur_rnx -= func(x_star)
+    print( cur_rnx)
+    rnxes.append(cur_rnx)
+
+for cur_rnx in rnxes:
     print(min(rnx_members) < cur_rnx < max(rnx_members))
 
+print(min(rnx_members))
+print(max(rnx_members))
     #print(t)
