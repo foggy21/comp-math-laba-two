@@ -11,7 +11,7 @@ from numpy import linspace
 
 a = 0.4
 b = 0.9
-nodes = 10
+nodes = 11
 
 x_stars =[0.42, 0.87, 0.67]
 x_values = linspace(a, b, num=nodes)
@@ -23,7 +23,7 @@ rnxes = []
 debug_forumla = 0
 #print(tableFinDif)
 
-print("Значения иксов =", x_values)
+print("Значения конечных разностей =", tableFinDif)
 x0 = 0
 
 for x_star in x_stars:

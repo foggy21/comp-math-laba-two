@@ -5,6 +5,7 @@ from scipy.misc import derivative
 def firstNewton(nodes, finDifTable, t):
     result = 0
     for i in range(nodes):
+        print("Значение из таблицы конеч. разностей =",finDifTable[i][0])
         result += (finDifTable[i][0]/factorial(i+1)) * firstNewtonMultipy(i, t)
     return result
 
@@ -57,7 +58,7 @@ def secondGaussMultiply(i, t):
     return result
 
 def rnx(nodes, x0, x_values, x_star):
-    result = abs(derivative(der_func, x0, n=nodes, order=nodes+1))
+    result = abs(derivative(der_func, x0, n=nodes, order=nodes+2))
     result /= factorial(nodes+1)
     for x in x_values:
         result *= (x_star - x)
