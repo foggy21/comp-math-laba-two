@@ -29,7 +29,7 @@ def secondNewtonMultipy(i, t):
 def firstGauss(nodes, finDifTable, t):
     result = 0
     for i in range(nodes):
-        result += (finDifTable[i][0] * (1/factorial(i+1))) * firstGaussMultipy(i, t)
+        result += (finDifTable[nodes//2-1][0] * (1/factorial(i+1))) * firstGaussMultipy(i, t)
     return result
 
 def firstGaussMultipy(i, t):
@@ -44,7 +44,7 @@ def firstGaussMultipy(i, t):
 def secondGauss(nodes, finDifTable, t):
     result = 0
     for i in range(nodes):
-        result += (finDifTable[i][nodes-i-1] * (1/factorial(i+1))) * secondGaussMultiply(i, t)
+        result += (finDifTable[nodes//2-1][nodes-i-1] * (1/factorial(i+1))) * secondGaussMultiply(i, t)
     return result
 
 def secondGaussMultiply(i, t):

@@ -20,9 +20,10 @@ tableFinDif = createFinDifTable(x_values)
 h = x_values[1] - x_values[0]
 rnx_members = []
 rnxes = []
+debug_forumla = 0
 #print(tableFinDif)
 
-print(len(tableFinDif))
+print("Значения иксов =", x_values)
 x0 = 0
 
 for x_star in x_stars:
@@ -35,20 +36,26 @@ for x_star in x_stars:
                 x0 = x
             break
         x_old = x
+    print("x0 -", x0)
     cur_rnx = 0
     rnx_members.append(rnx(nodes, x0, x_values, x_star))
     t = (abs(x_star - x0)) / h
     if (x_star <= x_values[1]):
         cur_rnx = firstNewton(nodes, tableFinDif, t)
+        debug_forumla = firstNewton
     if (x_star >= x_values[len(x_values)-2]):
         cur_rnx = secondNewton(nodes, tableFinDif, t)
+        debug_forumla = secondNewton
     if (x_star > x_values[1] and x_star < x_values[int(len(x_values)/2)]):
         cur_rnx = firstGauss(nodes, tableFinDif, t)
+        debug_forumla = firstGauss
     if (x_star < x_values[len(x_values)-2] and x_star > x_values[int(len(x_values)/2)]):
         cur_rnx = secondGauss(nodes, tableFinDif, t)
+        debug_forumla = secondGauss
     
     cur_rnx -= func(x_star)
-    print( cur_rnx)
+    print(debug_forumla.__str__())
+    print("Rn(x) =",cur_rnx)
     rnxes.append(cur_rnx)
 
 for cur_rnx in rnxes:
